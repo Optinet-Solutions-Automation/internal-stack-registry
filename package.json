@@ -1,0 +1,20 @@
+{
+  "name": "internal-stack-registry",
+  "version": "1.0.0",
+  "description": "Internal stack registry for Optinet Solutions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["registry", "stack", "internal"],
+  "author": "Optinet Solutions",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}
