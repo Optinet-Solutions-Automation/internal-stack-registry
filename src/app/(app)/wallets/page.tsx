@@ -1,8 +1,13 @@
-export default function WalletsPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold text-white">Wallets</h1>
-      <p className="mt-1 text-sm text-gray-400">Prepaid balances, burn rates, and top-ups</p>
-    </div>
-  );
+import { createClient } from '@/lib/supabase/server';
+import WalletsClient from './WalletsClient';
+
+export default async function WalletsPage() {
+  const supabase = await createClient();
+
+  const { data: wallets } = await supabase
+    .from('wallets')
+    .select('*, tools(id, name, category)')
+    .order('current_balance', { ascending: true });
+
+  return <WalletsClient wallets={wallets ?? []} />;
 }

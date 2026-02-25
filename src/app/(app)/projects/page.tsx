@@ -1,8 +1,25 @@
-export default function ProjectsPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold text-white">Projects</h1>
-      <p className="mt-1 text-sm text-gray-400">Projects and their linked tools</p>
-    </div>
-  );
+import { createClient } from '@/lib/supabase/server';
+import ProjectsClient from './ProjectsClient';
+
+export default async function ProjectsPage() {
+  const supabase = await createClient();
+
+  const { data: projects } = await supabase
+    .from('projects')
+    .select(`
+      *,
+      tool_project_mapping(
+        tool_id,
+        tools(
+          id,
+          name,
+          billing_type,
+          status,
+          billing_subscriptions(monthly_cost, currency)
+        )
+      )
+    `)
+    .order('name');
+
+  return <ProjectsClient projects={projects ?? []} />;
 }
