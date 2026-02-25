@@ -26,18 +26,22 @@
     },
     "3145bcfb98454fff9691cab0516a7d656ed286f5": {
       "workers": {
-        "app/(app)/wallets/[id]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!"
+        "app/(app)/wallets/[id]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22setBalance%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!",
+        "app/(app)/wallets/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22setBalance%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/(app)/wallets/[id]/page": "action-browser"
+        "app/(app)/wallets/[id]/page": "action-browser",
+        "app/(app)/wallets/page": "action-browser"
       }
     },
     "d9f093e597055cc2606b0c0469b5f518fcf0b9a0": {
       "workers": {
-        "app/(app)/wallets/[id]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!"
+        "app/(app)/wallets/[id]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22setBalance%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!",
+        "app/(app)/wallets/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22setBalance%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/(app)/wallets/[id]/page": "action-browser"
+        "app/(app)/wallets/[id]/page": "action-browser",
+        "app/(app)/wallets/page": "action-browser"
       }
     },
     "6531035d583b8397b205eebde12e022853ea8ad6": {
@@ -94,6 +98,16 @@
       },
       "layer": {
         "app/(app)/purchases/page": "action-browser"
+      }
+    },
+    "bf101c4a2d0151cc365c52516efaa39600cd3f89": {
+      "workers": {
+        "app/(app)/wallets/[id]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22setBalance%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!",
+        "app/(app)/wallets/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cwallets%5C%5Cactions.ts%22%2C%5B%22addTopUp%22%2C%22setBalance%22%2C%22updateThreshold%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(app)/wallets/[id]/page": "action-browser",
+        "app/(app)/wallets/page": "action-browser"
       }
     }
   },

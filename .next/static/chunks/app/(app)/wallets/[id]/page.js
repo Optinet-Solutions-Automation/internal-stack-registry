@@ -281,6 +281,7 @@ eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* har
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addTopUp: function() { return /* binding */ addTopUp; },
+/* harmony export */   setBalance: function() { return /* binding */ setBalance; },
 /* harmony export */   updateThreshold: function() { return /* binding */ updateThreshold; }
 /* harmony export */ });
 /* harmony import */ var next_dist_client_app_call_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/client/app-call-server */ "(app-pages-browser)/./node_modules/next/dist/client/app-call-server.js");
@@ -293,9 +294,10 @@ function __build_action__(action, args) {
   return (0,next_dist_client_app_call_server__WEBPACK_IMPORTED_MODULE_0__.callServer)(action.$$id, args)
 }
 
-/* __next_internal_action_entry_do_not_use__ {"3145bcfb98454fff9691cab0516a7d656ed286f5":"addTopUp","d9f093e597055cc2606b0c0469b5f518fcf0b9a0":"updateThreshold"} */ var updateThreshold = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("d9f093e597055cc2606b0c0469b5f518fcf0b9a0");
+/* __next_internal_action_entry_do_not_use__ {"3145bcfb98454fff9691cab0516a7d656ed286f5":"addTopUp","bf101c4a2d0151cc365c52516efaa39600cd3f89":"setBalance","d9f093e597055cc2606b0c0469b5f518fcf0b9a0":"updateThreshold"} */ var setBalance = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("bf101c4a2d0151cc365c52516efaa39600cd3f89");
 
 var addTopUp = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("3145bcfb98454fff9691cab0516a7d656ed286f5");
+var updateThreshold = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("d9f093e597055cc2606b0c0469b5f518fcf0b9a0");
 
 
 

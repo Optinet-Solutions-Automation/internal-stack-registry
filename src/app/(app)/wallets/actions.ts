@@ -54,3 +54,18 @@ export async function updateThreshold(walletId: string, threshold: number) {
   revalidatePath('/wallets');
   return { error: null };
 }
+
+export async function setBalance(walletId: string, balance: number) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from('wallets')
+    .update({ current_balance: balance })
+    .eq('id', walletId);
+
+  if (error) return { error: error.message };
+
+  revalidatePath('/wallets');
+  revalidatePath('/dashboard');
+  return { error: null };
+}
