@@ -10,11 +10,20 @@
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": ["registry", "stack", "internal"],
+  "keywords": [
+    "registry",
+    "stack",
+    "internal"
+  ],
   "author": "Optinet Solutions",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.97.0",
+    "dotenv": "^17.3.1"
   }
 }

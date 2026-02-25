@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install @supabase/supabase-js dotenv)",
+      "Bash(npm install -D ts-node)",
+      "Bash(npm run dev)"
+    ]
+  }
+}
