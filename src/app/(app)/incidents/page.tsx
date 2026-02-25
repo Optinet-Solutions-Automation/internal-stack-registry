@@ -1,8 +1,20 @@
-export default function IncidentsPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold text-white">Incidents</h1>
-      <p className="mt-1 text-sm text-gray-400">Outages, cost spikes, and security events</p>
-    </div>
-  );
+import { createClient } from '@/lib/supabase/server';
+import IncidentsClient from './IncidentsClient';
+
+export default async function IncidentsPage() {
+  const supabase = await createClient();
+
+  const [{ data: incidents }, { data: tools }] = await Promise.all([
+    supabase
+      .from('incident_logs')
+      .select('*, tools(id, name, category)')
+      .order('occurred_at', { ascending: false }),
+    supabase
+      .from('tools')
+      .select('id, name')
+      .eq('status', 'active')
+      .order('name'),
+  ]);
+
+  return <IncidentsClient incidents={incidents ?? []} tools={tools ?? []} />;
 }

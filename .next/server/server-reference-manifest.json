@@ -47,6 +47,22 @@
       "layer": {
         "app/(app)/credentials/page": "action-browser"
       }
+    },
+    "15ddf9ee9e002025c540d0c2f6e0bed38d32abc4": {
+      "workers": {
+        "app/(app)/incidents/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cincidents%5C%5Cactions.ts%22%2C%5B%22logIncident%22%2C%22resolveIncident%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(app)/incidents/page": "action-browser"
+      }
+    },
+    "95467358ab31f082e55905055ec53a2e3d688099": {
+      "workers": {
+        "app/(app)/incidents/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CChris-Optinet%5C%5Cinternal-stack-registry%5C%5Csrc%5C%5Capp%5C%5C(app)%5C%5Cincidents%5C%5Cactions.ts%22%2C%5B%22logIncident%22%2C%22resolveIncident%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(app)/incidents/page": "action-browser"
+      }
     }
   },
   "edge": {},

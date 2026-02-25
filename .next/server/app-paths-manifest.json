@@ -1,8 +1,8 @@
 {
-  "/(app)/billing/page": "app/(app)/billing/page.js",
-  "/(app)/credentials/page": "app/(app)/credentials/page.js",
   "/(app)/tools/page": "app/(app)/tools/page.js",
+  "/(app)/wallets/[id]/page": "app/(app)/wallets/[id]/page.js",
+  "/(app)/credentials/page": "app/(app)/credentials/page.js",
+  "/(app)/billing/page": "app/(app)/billing/page.js",
   "/(app)/wallets/page": "app/(app)/wallets/page.js",
-  "/(app)/projects/[id]/page": "app/(app)/projects/[id]/page.js",
-  "/(app)/wallets/[id]/page": "app/(app)/wallets/[id]/page.js"
+  "/(app)/incidents/page": "app/(app)/incidents/page.js"
 }
