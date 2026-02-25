@@ -122,6 +122,24 @@ export interface IncidentLog {
   created_at: string;
 }
 
+export interface Purchase {
+  id: string;
+  name: string;
+  purchase_date: string;
+  amount: number;
+  currency: string;
+  description: string | null;
+  vendor: string | null;
+  category: string | null;
+  assigned_to: string | null;
+  warranty_id: string | null;
+  warranty_expires: string | null;
+  receipt_url: string | null;
+  warranty_receipt_url: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -135,6 +153,7 @@ export interface Database {
       tool_project_mapping: { Row: ToolProjectMapping };
       credential_reference: { Row: CredentialReference };
       incident_logs: { Row: IncidentLog };
+      purchases: { Row: Purchase };
     };
   };
 }

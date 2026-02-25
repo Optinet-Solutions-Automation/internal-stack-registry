@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { href: '/credentials', label: 'Credentials',   icon: '◬' },
   { href: '/incidents',   label: 'Incidents',     icon: '◭' },
   { href: '/alerts',      label: 'Alerts',        icon: '◆' },
+  { href: '/purchases',   label: 'Purchases',     icon: '◻' },
   { href: '/settings',    label: 'Settings',      icon: '◌' },
 ];
 
