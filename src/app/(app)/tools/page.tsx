@@ -1,8 +1,13 @@
-export default function ToolsPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold text-white">Tools</h1>
-      <p className="mt-1 text-sm text-gray-400">All registered tools and services</p>
-    </div>
-  );
+import { createClient } from '@/lib/supabase/server';
+import ToolsClient from './ToolsClient';
+
+export default async function ToolsPage() {
+  const supabase = await createClient();
+
+  const { data: tools } = await supabase
+    .from('tools')
+    .select('*, billing_subscriptions(monthly_cost, currency)')
+    .order('name');
+
+  return <ToolsClient tools={tools ?? []} />;
 }
