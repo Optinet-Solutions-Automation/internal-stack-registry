@@ -19,13 +19,13 @@ export default async function AlertsPage() {
     { data: subscriptions },
     { data: credentials },
     { data: incidents },
-  ] = await Promise.all([
+  ] = (await Promise.all([
     supabase.from('wallets').select('*, tools(id, name)'),
     supabase.from('usage_logs').select('*, tools(id, name)').order('month', { ascending: false }),
     supabase.from('billing_subscriptions').select('*, tools(id, name)'),
     supabase.from('credential_reference').select('*, tools(id, name)'),
     supabase.from('incident_logs').select('*, tools(id, name)').neq('status', 'resolved'),
-  ]);
+  ])) as Array<{ data: any[] | null; error: any }>;
 
   const now = new Date();
   const currentMonth = now.toISOString().slice(0, 7);

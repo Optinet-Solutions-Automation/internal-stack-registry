@@ -4,10 +4,10 @@ import ToolsClient from './ToolsClient';
 export default async function ToolsPage() {
   const supabase = await createClient();
 
-  const { data: tools } = await supabase
+  const { data: tools } = (await supabase
     .from('tools')
     .select('*, billing_subscriptions(monthly_cost, currency)')
-    .order('name');
+    .order('name')) as { data: any[] | null; error: any };
 
   return <ToolsClient tools={tools ?? []} />;
 }

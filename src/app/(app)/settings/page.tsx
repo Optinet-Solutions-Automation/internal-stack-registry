@@ -4,10 +4,7 @@ import SettingsClient from './SettingsClient';
 export default async function SettingsPage() {
   const supabase = await createClient();
 
-  const [{ data: userRoles }, { data: authUsers }] = await Promise.all([
-    supabase.from('user_roles').select('*'),
-    supabase.auth.admin?.listUsers().then(r => r?.data?.users ?? []).catch(() => []),
-  ]);
+  const { data: userRoles } = await supabase.from('user_roles').select('*');
 
   // Get current user
   const { data: { user } } = await supabase.auth.getUser();

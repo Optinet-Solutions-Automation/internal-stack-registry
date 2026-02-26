@@ -4,7 +4,7 @@ import BillingClient from './BillingClient';
 export default async function BillingPage() {
   const supabase = await createClient();
 
-  const [{ data: subscriptions }, { data: tools }] = await Promise.all([
+  const [{ data: subscriptions }, { data: tools }] = (await Promise.all([
     supabase
       .from('billing_subscriptions')
       .select('*, tools(id, name, category)')
@@ -15,7 +15,7 @@ export default async function BillingPage() {
       .eq('billing_type', 'subscription')
       .eq('status', 'active')
       .order('name'),
-  ]);
+  ])) as Array<{ data: any[] | null; error: any }>;
 
   return <BillingClient subscriptions={subscriptions ?? []} tools={tools ?? []} />;
 }

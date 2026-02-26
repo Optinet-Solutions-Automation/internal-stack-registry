@@ -57,14 +57,14 @@ export default async function DashboardPage() {
     { data: usageLogs },
     { data: incidents },
     { data: credentials },
-  ] = await Promise.all([
+  ] = (await Promise.all([
     supabase.from('tools').select('id, name, critical, risk_level, status, billing_type'),
     supabase.from('billing_subscriptions').select('monthly_cost, currency, renewal_date, tools(name)'),
     supabase.from('wallets').select('current_balance, low_threshold, currency, tools(id, name)'),
     supabase.from('usage_logs').select('usage_amount, budget_limit, currency, month, tools(id, name)').order('month', { ascending: false }),
     supabase.from('incident_logs').select('id, severity, status, type, tools(name)').neq('status', 'resolved'),
     supabase.from('credential_reference').select('last_rotated, rotation_policy, tools(name)'),
-  ]);
+  ])) as Array<{ data: any[] | null; error: any }>;
 
   const now = new Date();
   const currentMonth = now.toISOString().slice(0, 7);

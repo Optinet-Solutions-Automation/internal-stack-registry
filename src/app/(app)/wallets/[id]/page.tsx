@@ -6,7 +6,7 @@ import WalletDetailClient from './WalletDetailClient';
 export default async function WalletDetailPage({ params }: { params: { id: string } }) {
   const supabase = await createClient();
 
-  const [{ data: wallet }, { data: topups }, { data: usageLogs }] = await Promise.all([
+  const [{ data: wallet }, { data: topups }, { data: usageLogs }] = (await Promise.all([
     supabase
       .from('wallets')
       .select('*, tools(id, name, category)')
@@ -22,7 +22,7 @@ export default async function WalletDetailPage({ params }: { params: { id: strin
       .select('*')
       .order('month', { ascending: false })
       .limit(6),
-  ]);
+  ])) as Array<{ data: any; error: any }>;
 
   if (!wallet) notFound();
 

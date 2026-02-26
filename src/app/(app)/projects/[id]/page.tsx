@@ -56,7 +56,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export default async function ProjectDetailPage({ params }: { params: { id: string } }) {
   const supabase = await createClient();
 
-  const [{ data: project }, { data: mappings }] = await Promise.all([
+  const [{ data: project }, { data: mappings }] = (await Promise.all([
     supabase.from('projects').select('*').eq('id', params.id).single(),
     supabase
       .from('tool_project_mapping')
@@ -69,7 +69,7 @@ export default async function ProjectDetailPage({ params }: { params: { id: stri
         )
       `)
       .eq('project_id', params.id),
-  ]);
+  ])) as Array<{ data: any; error: any }>;
 
   if (!project) notFound();
 

@@ -1,7 +1,21 @@
 {
-  "/(app)/settings/page": "app/(app)/settings/page.js",
-  "/(app)/wallets/page": "app/(app)/wallets/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/login/page": "app/login/page.js",
+  "/auth/callback/route": "app/auth/callback/route.js",
+  "/page": "app/page.js",
   "/(app)/wallets/[id]/page": "app/(app)/wallets/[id]/page.js",
+  "/(app)/dashboard/page": "app/(app)/dashboard/page.js",
+  "/(app)/projects/[id]/page": "app/(app)/projects/[id]/page.js",
+  "/(app)/incidents/[id]/page": "app/(app)/incidents/[id]/page.js",
+  "/(app)/billing/page": "app/(app)/billing/page.js",
   "/(app)/purchases/page": "app/(app)/purchases/page.js",
-  "/(app)/billing/page": "app/(app)/billing/page.js"
+  "/(app)/tools/[id]/page": "app/(app)/tools/[id]/page.js",
+  "/(app)/tools/page": "app/(app)/tools/page.js",
+  "/(app)/projects/page": "app/(app)/projects/page.js",
+  "/(app)/wallets/page": "app/(app)/wallets/page.js",
+  "/(app)/incidents/page": "app/(app)/incidents/page.js",
+  "/(app)/usage/page": "app/(app)/usage/page.js",
+  "/(app)/alerts/page": "app/(app)/alerts/page.js",
+  "/(app)/settings/page": "app/(app)/settings/page.js",
+  "/(app)/credentials/page": "app/(app)/credentials/page.js"
 }

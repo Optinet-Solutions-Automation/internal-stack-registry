@@ -19,7 +19,7 @@ export default async function ProjectsPage() {
         )
       )
     `)
-    .order('name');
+    .order('name') as { data: any[] | null; error: any };
 
   return <ProjectsClient projects={projects ?? []} />;
 }

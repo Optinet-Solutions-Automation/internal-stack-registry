@@ -7,7 +7,7 @@ export default async function WalletsPage() {
   const { data: wallets } = await supabase
     .from('wallets')
     .select('*, tools(id, name, category)')
-    .order('current_balance', { ascending: true });
+    .order('current_balance', { ascending: true }) as { data: any[] | null; error: any };
 
   return <WalletsClient wallets={wallets ?? []} />;
 }
