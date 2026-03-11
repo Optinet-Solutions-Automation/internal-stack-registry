@@ -97,6 +97,8 @@ export interface CredentialReference {
   tool_id: string;
   login_type: string | null;
   credential_location: string | null;
+  username: string | null;
+  password: string | null;
   last_rotated: string | null;
   rotation_policy: string | null;
   owner: string | null;
@@ -192,9 +194,9 @@ export interface Database {
         Relationships: [];
       };
       credential_reference: {
-        Row: { id: string; tool_id: string; login_type: string | null; credential_location: string | null; last_rotated: string | null; rotation_policy: string | null; owner: string | null; compliance_notes: string | null; created_at: string; updated_at: string };
-        Insert: { id?: string; tool_id: string; login_type?: string | null; credential_location?: string | null; last_rotated?: string | null; rotation_policy?: string | null; owner?: string | null; compliance_notes?: string | null; created_at?: string; updated_at?: string };
-        Update: { id?: string; tool_id?: string; login_type?: string | null; credential_location?: string | null; last_rotated?: string | null; rotation_policy?: string | null; owner?: string | null; compliance_notes?: string | null; created_at?: string; updated_at?: string };
+        Row: { id: string; tool_id: string; login_type: string | null; credential_location: string | null; username: string | null; password: string | null; last_rotated: string | null; rotation_policy: string | null; owner: string | null; compliance_notes: string | null; created_at: string; updated_at: string };
+        Insert: { id?: string; tool_id: string; login_type?: string | null; credential_location?: string | null; username?: string | null; password?: string | null; last_rotated?: string | null; rotation_policy?: string | null; owner?: string | null; compliance_notes?: string | null; created_at?: string; updated_at?: string };
+        Update: { id?: string; tool_id?: string; login_type?: string | null; credential_location?: string | null; username?: string | null; password?: string | null; last_rotated?: string | null; rotation_policy?: string | null; owner?: string | null; compliance_notes?: string | null; created_at?: string; updated_at?: string };
         Relationships: [];
       };
       incident_logs: {

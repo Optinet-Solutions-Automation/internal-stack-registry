@@ -7,6 +7,8 @@ export type CreateCredentialInput = {
   tool_id: string;
   login_type: string;
   credential_location: string;
+  username: string;
+  password: string;
   last_rotated: string;
   rotation_policy: string;
   owner: string;
@@ -20,6 +22,8 @@ export async function createCredential(input: CreateCredentialInput) {
     tool_id: input.tool_id,
     login_type: input.login_type || null,
     credential_location: input.credential_location || null,
+    username: input.username || null,
+    password: input.password || null,
     last_rotated: input.last_rotated || null,
     rotation_policy: input.rotation_policy || null,
     owner: input.owner || null,
