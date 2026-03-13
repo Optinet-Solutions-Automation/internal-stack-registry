@@ -8,7 +8,8 @@ import { useState, useEffect } from 'react';
 
 const NAV_ITEMS = [
   { href: '/dashboard',   label: 'Dashboard',    icon: '▦' },
-  { href: '/tools',       label: 'Tools',         icon: '⚙' },
+  { href: '/tools',          label: 'Tools',          icon: '⚙' },
+  { href: '/tool-requests',  label: 'Tool Requests',  icon: '⊕' },
   { href: '/projects',    label: 'Projects',      icon: '◫' },
   { href: '/billing',     label: 'Billing',       icon: '◈' },
   { href: '/wallets',     label: 'Wallets',       icon: '◉' },

@@ -7,6 +7,7 @@ import AddToolModal from './AddToolModal';
 import EditToolModal from './EditToolModal';
 import { deleteTool } from './actions';
 import { SearchInput, Pagination, useTableControls } from '@/components/TableControls';
+import RequestToolModal from '../tool-requests/RequestToolModal';
 
 type ToolWithBilling = Tool & {
   billing_subscriptions: { monthly_cost: number; currency: string }[] | null;
@@ -43,6 +44,7 @@ function CardField({ label, children }: { label: string; children: React.ReactNo
 
 export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
   const [showAdd, setShowAdd] = useState(false);
+  const [showRequest, setShowRequest] = useState(false);
   const [editTool, setEditTool] = useState<ToolWithBilling | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -80,10 +82,16 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
           <h1 className="text-xl sm:text-2xl font-bold text-white">Tools</h1>
           <p className="mt-1 text-xs sm:text-sm text-gray-400">{tools.length} registered tools</p>
         </div>
-        <button onClick={() => setShowAdd(true)}
-          className="w-full sm:w-auto px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-colors">
-          + Add Tool
-        </button>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <button onClick={() => setShowRequest(true)}
+            className="w-full sm:w-auto px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white text-sm font-medium rounded-lg border border-gray-700 transition-colors">
+            Request a Tool
+          </button>
+          <button onClick={() => setShowAdd(true)}
+            className="w-full sm:w-auto px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-colors">
+            + Add Tool
+          </button>
+        </div>
       </div>
 
       {/* Search + Filters */}
@@ -232,6 +240,7 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
       </div>
 
       {showAdd && <AddToolModal onClose={() => setShowAdd(false)} />}
+      {showRequest && <RequestToolModal onClose={() => setShowRequest(false)} />}
       {editTool && <EditToolModal tool={editTool} onClose={() => setEditTool(null)} />}
     </div>
   );

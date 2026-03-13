@@ -7,6 +7,7 @@ export type IncidentType = 'outage' | 'cost_spike' | 'security';
 export type IncidentSeverity = 'low' | 'medium' | 'high' | 'critical';
 export type IncidentStatus = 'open' | 'investigating' | 'resolved';
 export type UserRole = 'super_admin' | 'finance_admin' | 'devops' | 'viewer';
+export type ToolRequestStatus = 'pending' | 'approved' | 'rejected';
 
 export interface UserRoleRow {
   id: string;
@@ -124,6 +125,20 @@ export interface IncidentLog {
   created_at: string;
 }
 
+export interface ToolRequest {
+  id: string;
+  tool_name: string;
+  category: string | null;
+  vendor: string | null;
+  justification: string | null;
+  requested_by: string;
+  status: ToolRequestStatus;
+  reviewed_by: string | null;
+  review_notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Purchase {
   id: string;
   name: string;
@@ -203,6 +218,12 @@ export interface Database {
         Row: { id: string; tool_id: string; type: IncidentType; severity: IncidentSeverity; description: string | null; root_cause: string | null; financial_impact: number | null; resolution_steps: string | null; preventive_measures: string | null; status: IncidentStatus; resolved_by: string | null; occurred_at: string; resolved_at: string | null; created_at: string };
         Insert: { id?: string; tool_id: string; type: IncidentType; severity: IncidentSeverity; description?: string | null; root_cause?: string | null; financial_impact?: number | null; resolution_steps?: string | null; preventive_measures?: string | null; status?: IncidentStatus; resolved_by?: string | null; occurred_at: string; resolved_at?: string | null; created_at?: string };
         Update: { id?: string; tool_id?: string; type?: IncidentType; severity?: IncidentSeverity; description?: string | null; root_cause?: string | null; financial_impact?: number | null; resolution_steps?: string | null; preventive_measures?: string | null; status?: IncidentStatus; resolved_by?: string | null; occurred_at?: string; resolved_at?: string | null; created_at?: string };
+        Relationships: [];
+      };
+      tool_requests: {
+        Row: { id: string; tool_name: string; category: string | null; vendor: string | null; justification: string | null; requested_by: string; status: ToolRequestStatus; reviewed_by: string | null; review_notes: string | null; created_at: string; updated_at: string };
+        Insert: { id?: string; tool_name: string; category?: string | null; vendor?: string | null; justification?: string | null; requested_by: string; status?: ToolRequestStatus; reviewed_by?: string | null; review_notes?: string | null; created_at?: string; updated_at?: string };
+        Update: { id?: string; tool_name?: string; category?: string | null; vendor?: string | null; justification?: string | null; requested_by?: string; status?: ToolRequestStatus; reviewed_by?: string | null; review_notes?: string | null; created_at?: string; updated_at?: string };
         Relationships: [];
       };
       purchases: {
