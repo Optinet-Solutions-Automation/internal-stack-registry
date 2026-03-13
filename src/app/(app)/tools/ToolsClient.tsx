@@ -4,6 +4,8 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import type { Tool, BillingType, RiskLevel, ToolStatus } from '@/types/database';
 import AddToolModal from './AddToolModal';
+import EditToolModal from './EditToolModal';
+import { deleteTool } from './actions';
 import { SearchInput, Pagination, useTableControls } from '@/components/TableControls';
 
 type ToolWithBilling = Tool & {
@@ -40,7 +42,10 @@ function CardField({ label, children }: { label: string; children: React.ReactNo
 }
 
 export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
-  const [showModal, setShowModal] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [editTool, setEditTool] = useState<ToolWithBilling | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const [filterCategory, setFilterCategory] = useState('');
   const [filterBilling, setFilterBilling] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
@@ -60,6 +65,13 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
 
   const { search, setSearch, page, setPage, totalPages, totalFiltered, paginated } = useTableControls(preFiltered, searchFn);
 
+  const handleDelete = async (id: string) => {
+    setDeleting(true);
+    await deleteTool(id);
+    setDeleting(false);
+    setConfirmDeleteId(null);
+  };
+
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Header */}
@@ -68,7 +80,7 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
           <h1 className="text-xl sm:text-2xl font-bold text-white">Tools</h1>
           <p className="mt-1 text-xs sm:text-sm text-gray-400">{tools.length} registered tools</p>
         </div>
-        <button onClick={() => setShowModal(true)}
+        <button onClick={() => setShowAdd(true)}
           className="w-full sm:w-auto px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-colors">
           + Add Tool
         </button>
@@ -111,12 +123,13 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
           <div className="bg-gray-900 border border-gray-800 rounded-xl px-5 py-10 text-center text-gray-500">No tools found</div>
         ) : paginated.map(tool => {
           const sub = tool.billing_subscriptions?.[0];
+          const isConfirming = confirmDeleteId === tool.id;
           return (
-            <Link key={tool.id} href={`/tools/${tool.id}`} className="block bg-gray-900 border border-gray-800 rounded-xl p-4 space-y-1 hover:border-gray-700 transition-colors">
+            <div key={tool.id} className="bg-gray-900 border border-gray-800 rounded-xl p-4 space-y-1 hover:border-gray-700 transition-colors">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   {tool.critical && <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />}
-                  <span className="font-medium text-white text-sm">{tool.name}</span>
+                  <Link href={`/tools/${tool.id}`} className="font-medium text-white text-sm hover:text-indigo-300 transition-colors">{tool.name}</Link>
                 </div>
                 <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium capitalize ${STATUS_BADGE[tool.status]}`}>{tool.status}</span>
               </div>
@@ -126,7 +139,28 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
               <CardField label="Risk"><span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium capitalize ${RISK_BADGE[tool.risk_level]}`}>{tool.risk_level}</span></CardField>
               <CardField label="Owner"><span className="text-xs text-gray-400">{tool.owner ?? '—'}</span></CardField>
               <CardField label="Monthly Cost"><span className="text-xs text-gray-300 font-medium">{sub ? `${sub.currency} ${sub.monthly_cost.toFixed(2)}` : '—'}</span></CardField>
-            </Link>
+              <div className="flex items-center justify-between pt-2 border-t border-gray-800 mt-2">
+                <Link href={`/tools/${tool.id}`} className="text-indigo-400 hover:text-indigo-300 text-xs font-medium transition-colors">View →</Link>
+                <div className="flex items-center gap-2">
+                  {isConfirming ? (
+                    <>
+                      <span className="text-xs text-gray-400">Delete?</span>
+                      <button onClick={() => handleDelete(tool.id)} disabled={deleting}
+                        className="text-xs text-red-400 hover:text-red-300 font-medium transition-colors disabled:opacity-50">Yes</button>
+                      <button onClick={() => setConfirmDeleteId(null)}
+                        className="text-xs text-gray-400 hover:text-white transition-colors">No</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => setEditTool(tool)}
+                        className="text-xs text-gray-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-gray-800">Edit</button>
+                      <button onClick={() => setConfirmDeleteId(tool.id)}
+                        className="text-xs text-red-500 hover:text-red-400 transition-colors px-2 py-1 rounded hover:bg-gray-800">Delete</button>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
           );
         })}
         <Pagination page={page} totalPages={totalPages} totalFiltered={totalFiltered} onPageChange={setPage} />
@@ -153,6 +187,7 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
                 <tr><td colSpan={8} className="px-5 py-10 text-center text-gray-500">No tools found</td></tr>
               ) : paginated.map(tool => {
                 const sub = tool.billing_subscriptions?.[0];
+                const isConfirming = confirmDeleteId === tool.id;
                 return (
                   <tr key={tool.id} className="hover:bg-gray-800/50 transition-colors">
                     <td className="px-5 py-4">
@@ -168,7 +203,25 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
                     <td className="px-5 py-4"><span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium capitalize ${RISK_BADGE[tool.risk_level]}`}>{tool.risk_level}</span></td>
                     <td className="px-5 py-4"><span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium capitalize ${STATUS_BADGE[tool.status]}`}>{tool.status}</span></td>
                     <td className="px-5 py-4 text-right text-gray-300">{sub ? `${sub.currency} ${sub.monthly_cost.toFixed(2)}` : '—'}</td>
-                    <td className="px-5 py-4 text-right"><Link href={`/tools/${tool.id}`} className="text-indigo-400 hover:text-indigo-300 text-xs font-medium transition-colors">View →</Link></td>
+                    <td className="px-5 py-4">
+                      <div className="flex items-center justify-end gap-3">
+                        <Link href={`/tools/${tool.id}`} className="text-indigo-400 hover:text-indigo-300 text-xs font-medium transition-colors">View</Link>
+                        <button onClick={() => setEditTool(tool)}
+                          className="text-gray-400 hover:text-white text-xs font-medium transition-colors">Edit</button>
+                        {isConfirming ? (
+                          <span className="flex items-center gap-1.5">
+                            <span className="text-xs text-gray-400">Sure?</span>
+                            <button onClick={() => handleDelete(tool.id)} disabled={deleting}
+                              className="text-xs text-red-400 hover:text-red-300 font-medium transition-colors disabled:opacity-50">Yes</button>
+                            <button onClick={() => setConfirmDeleteId(null)}
+                              className="text-xs text-gray-400 hover:text-white transition-colors">No</button>
+                          </span>
+                        ) : (
+                          <button onClick={() => setConfirmDeleteId(tool.id)}
+                            className="text-red-500 hover:text-red-400 text-xs font-medium transition-colors">Delete</button>
+                        )}
+                      </div>
+                    </td>
                   </tr>
                 );
               })}
@@ -178,7 +231,8 @@ export default function ToolsClient({ tools }: { tools: ToolWithBilling[] }) {
         <Pagination page={page} totalPages={totalPages} totalFiltered={totalFiltered} onPageChange={setPage} />
       </div>
 
-      {showModal && <AddToolModal onClose={() => setShowModal(false)} />}
+      {showAdd && <AddToolModal onClose={() => setShowAdd(false)} />}
+      {editTool && <EditToolModal tool={editTool} onClose={() => setEditTool(null)} />}
     </div>
   );
 }
