@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -24,7 +23,6 @@ const NAV_ITEMS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = createClient();
   const [open, setOpen] = useState(false);
 
   // Close sidebar on route change
@@ -33,8 +31,9 @@ export default function Sidebar() {
   }, [pathname]);
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    await fetch('/api/auth/logout', { method: 'POST' });
     router.push('/login');
+    router.refresh();
   };
 
   return (
